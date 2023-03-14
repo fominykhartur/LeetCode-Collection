@@ -25,10 +25,27 @@ All the integers in nums are unique.
 nums is sorted in ascending order.
 '''
 
-
+#v1
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         for i in range(0,len(nums)):
             if nums[i]==target:
                 return i
+        return -1
+
+#v2
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left = 0
+        right = len(nums)-1
+        while left <= right:
+            mid = int((left+right)/2)
+            num = nums[mid]
+            if num == target:
+                return mid
+            if num > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+
         return -1

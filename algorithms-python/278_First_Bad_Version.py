@@ -27,13 +27,7 @@ Constraints:
 1 <= bad <= n <= 231 - 1
 '''
 
-
-def isBadVersion(n):
-    if n >= 1702766719:
-        return True
-    else:
-        return False
-
+#v1
 
 class Solution:
     def firstBadVersion(self, n: int) -> int:
@@ -63,5 +57,22 @@ class Solution:
                 continue
 
 
-test = Solution()
-print(test.firstBadVersion(2126753390))
+
+#v2
+# The isBadVersion API is already defined for you.
+# def isBadVersion(version: int) -> bool:
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        left = 0
+        right = n
+
+        while left <= right:
+            mid = int((left+right)/2)
+            if isBadVersion(mid):
+                if not isBadVersion(mid-1):
+                    return mid
+                right = mid 
+            else:
+                if isBadVersion(mid+1):
+                    return mid+1
+                left = mid
